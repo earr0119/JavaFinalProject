@@ -12,7 +12,7 @@ public class Student
 {
     private double average;
 
-    private final List<Course> courses = new ArrayList<>();
+    private final List<Course> courses1 = new ArrayList<>();
 
     private final Map<String, Course> approvedCourses = new HashMap<>();
 
@@ -23,16 +23,10 @@ public class Student
 
     public void enrollToCourse( Course course )
     {
-        if (courses.contains(course)) {
-            System.out.println("Student " + getId() + " is already enrrolled to " + course.getName() + ".");
-        } else {
-            courses.add(course);
-            System.out.println("¡Successful registration to the course " + course.getName() + "!");
+        if ( ! isAttendingCourse( course.getCode() ) ) {
+            courses1.add(course);
+            System.out.println("Student " + getId() + " is enrrolled to " + course.getName() + ".");
         }
-    }
-
-    public List<Course> getCourses() {
-        return courses;
     }
 
     public void registerApprovedCourse( Course course )
@@ -43,7 +37,12 @@ public class Student
 
     public boolean isAttendingCourse( String courseCode )
     {
-        return approvedCourses.containsKey(courseCode);
+       for ( Course course: courses1 ) {
+           if ( course.getCode().equals( courseCode ) )
+            System.out.println("Student is already enrrolled in course " + courseCode + "!");
+            return true;
+       }
+        return false;
     }
 
     @Override
@@ -55,6 +54,6 @@ public class Student
     @Override
     public String toString()
     {
-        return "Student {" + super.toString() + "}";
+        return "Student {" + super.toString() + "; " + courses1 +"}";
     }
 }
