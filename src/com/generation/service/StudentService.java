@@ -24,9 +24,17 @@ public class StudentService
         return null;
     }
 
-    public void showSummary()
-    {
-        //TODO implement
+    public void showSummary() {
+        System.out.println("Those are the Students");
+        System.out.println("Registered Students:");
+
+        for (Student student : students.values()) {
+            for (Course course : student.getCourses()) { // Aquí debes proporcionar la colección de cursos del estudiante
+                System.out.println("Assigned Course: " + course.getName());
+                System.out.println("Is Attending: " + student.isAttendingCourse(course.getCode()));
+            }
+            System.out.println();
+        }
     }
 
     public void enrollToCourse( String studentId, Course course )
